@@ -11,11 +11,13 @@ Plug 'vim-airline/vim-airline-themes'	"temas para el vim-airline
 Plug 'preservim/nerdtree'		"gestor de archivos en forma de arbol.
 Plug 'christoomey/vim-tmux-navigator'	"poder navegar entre archivos abiertos
 Plug 'jiangmiao/auto-pairs'		"autocompletado de llaves, corchetes, etc.
-Plug 'neoclide/coc.nvim', {'branch': 'release'}	"autocompletado inteligente
+Plug 'neoclide/coc.nvim', {'branch': 'release'}	"autocompletado inteligentei
 
-" git
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
+Plug 'airblade/vim-gitgutter'
+Plug 'oberblastmeister/neogit'
+Plug 'monaqa/diffview.nvim'
+Plug 'sindrets/diffview.nvim'
 
 call plug#end() 			"cerramos el llamado de los plugins
 
@@ -29,7 +31,7 @@ set noshowmode				"me deja de mostrar el modo en el que estamos 'normal, insert,
 syntax enable 				"activa el coloreado de sintaxis en algunos tipos de archivos como html, c, c++
 set encoding=utf-8 			"permite setear la codificación de archivos para aceptar caracteres especiales
 
-"set sw=4 				"la indentación genera 4 espacios
+set sw=4 				"la indentación genera 4 espacios
 
 set nowrap				"el texto en una linea no baja a la siguiente, solo continua en la misma hasta el infinito.
 "set noswapfile				"para evitar el mensaje que sale al abrir algunos archivos sobre swap.
@@ -41,6 +43,24 @@ set clipboard=unnamed			"para poder utilizar el portapapeles del sistema operati
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+set guifont=10
+
+" fold
+"set foldmethod=indent
+set foldlevel=1
+set foldclose=all
+
+let s:fontsize = 10
+function! AdjustFontSize(amount)
+  let s:fontsize = s:fontsize+a:amount
+  :execute "GuiFont! Consolas:h" . s:fontsize
+endfunction
+
+noremap <C-ScrollWheelUp> :call AdjustFontSize(1)<CR>
+noremap <C-ScrollWheelDown> :call AdjustFontSize(-1)<CR>
+inoremap <C-ScrollWheelUp> <Esc>:call AdjustFontSize(1)<CR>a
+inoremap <C-ScrollWheelDown> <Esc>:call AdjustFontSize(-1)<CR>a
 
 
 set termguicolors 			"activa el true color en la terminal
@@ -231,3 +251,27 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" tabs navigation
+map <Leader>h :tabprevious<cr>
+map <Leader>l :tabnext<cr>
+
+" Configurar Ctrl + Shift + flechas para seleccionar texto
+inoremap <S-Right> <Right>
+inoremap <S-Left> <Left>
+inoremap <S-Up> <Up>
+inoremap <S-Down> <Down>
+
+" Borrar el texto seleccionado al presionar 'Delete' o 'Backspace'
+nnoremap <Delete> d
+"nnoremap <BS> d
+
+" Configurar Ctrl + V para pegar desde el portapapeles
+nnoremap <C-V> :call system("xclip -o -selection clipboard")<CR>p
+    
+" Configurar Ctrl + Y para rehacer en lugar de Ctrl + R
+nnoremap <C-Y> <C-R>
+
+
+
+
