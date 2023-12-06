@@ -1,0 +1,146 @@
+# configurar neovim para que detecte la tecla TAB e inserte 4 espacios es blanco
+
+Para configurar Neovim para que al presionar la tecla `TAB` inserte 4 espacios en lugar de un carácter de tabulación, 
+puedes hacer lo siguiente en tu archivo de configuración de Neovim (`init.vim` o `init.lua`):
+
+### En VimScript (init.vim):
+
+```vim
+" Configuración para insertar 4 espacios al presionar TAB
+set tabstop=4
+set shiftwidth=4
+set expandtab
+```
+
+### En Lua (init.lua):
+
+```lua
+-- Configuración para insertar 4 espacios al presionar TAB
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+```
+
+Estas configuraciones hacen lo siguiente:
+
+- `tabstop`: Configura el número de espacios que representa un carácter de tabulación al visualizar o editar.
+- `shiftwidth`: Establece la cantidad de espacios insertados o eliminados por las teclas `<` y `>`, 
+	o cuando se realiza autoindentación.
+	
+- `expandtab`: Hace que Neovim inserte espacios en lugar de tabuladores al presionar la tecla `TAB`.
+
+Después de agregar estas configuraciones y reiniciar Neovim, al presionar la tecla `TAB`, 
+debería insertar 4 espacios en lugar de un tabulador.
+
+Recuerda que es importante ser consistente en la configuración de tabuladores y espacios en tus proyectos 
+y colaborar con otros desarrolladores que puedan tener diferentes preferencias de configuración.
+
+---------------------------------------------------------------------------------------------------------------------
+
+# como deshacer cambios en nvim
+
+En Neovim, puedes deshacer cambios utilizando el modo normal. Aquí están los comandos básicos para deshacer cambios:
+
+1. **Deshacer un Cambio (Undo):**
+   - Presiona `u` en el modo normal para deshacer el cambio más reciente.
+
+2. **Deshacer Varias Veces:**
+   - Para deshacer varios cambios en secuencia, simplemente presiona `u` varias veces.
+
+3. **Rehacer un Cambio (Redo):**
+   - Si accidentalmente deshaces un cambio y deseas recuperarlo, puedes presionar `Ctrl + R` en el modo normal 
+   para rehacer el cambio más reciente.
+
+Estos comandos son estándar en la mayoría de los editores de texto basados en Vim, incluido Neovim. 
+Ten en cuenta que estos comandos operan a nivel de cambio y no a nivel de línea. Si quieres deshacer o rehacer cambios en líneas específicas, puedes utilizar el comando `:earlier` o `:later` seguido por el número de cambios que deseas deshacer o rehacer.
+
+Por ejemplo, para retroceder en el tiempo 3 cambios:
+
+```vim
+:earlier 3
+```
+
+Para avanzar en el tiempo 3 cambios:
+
+```vim
+:later 3
+```
+
+Recuerda que la cantidad de cambios que puedes deshacer o rehacer depende de la configuración de tu 
+archivo de respaldo (`undofile`). Si esta opción está habilitada, puedes tener un historial de cambios más extenso.
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+# Como recargar archivo init.vim sin los plugins
+
+
+Si deseas recargar tu archivo de configuración (`init.vim` en el caso de Vim, o `init.lua` en el caso de Neovim) sin cargar los plugins, puedes usar los siguientes pasos:
+
+### Para Vim (`init.vim`):
+
+1. **Guardar Cambios:**
+   - Asegúrate de haber guardado cualquier cambio que hayas realizado en tu archivo de configuración.
+
+2. **Recargar sin Plugins:**
+   - En el modo normal, escribe el siguiente comando para recargar tu archivo sin cargar los plugins:
+     ```vim
+     :source $MYVIMRC
+     ```
+   - Esto recargará tu archivo de configuración sin volver a cargar los plugins.
+
+### Para Neovim (`init.lua`):
+
+1. **Guardar Cambios:**
+   - Asegúrate de haber guardado cualquier cambio que hayas realizado en tu archivo de configuración.
+
+2. **Recargar sin Plugins:**
+   - En el modo normal, escribe el siguiente comando para recargar tu archivo sin cargar los plugins:
+     ```lua
+     :luafile %
+     ```
+   - Esto recargará tu archivo de configuración sin volver a cargar los plugins.
+
+Recuerda que esta técnica solo recargará tu archivo de configuración y no afectará los plugins. 
+Si realizaste cambios en la configuración de los plugins, 
+es posible que necesites reiniciar Vim o Neovim para que esos cambios surtan efecto. También,
+ten en cuenta que algunos plugins pueden cargar configuraciones de manera diferida, 
+y reiniciar el editor puede ser necesario en esos casos.
+
+--------------------------------------------------------------------------------------------------------------
+
+# configurar neovim para que detecte la tecla TAB e inserte 4 espacios es blanco
+
+Para configurar Neovim para que al presionar la tecla `TAB` inserte 4 espacios en lugar de un carácter de tabulación, 
+puedes hacer lo siguiente en tu archivo de configuración de Neovim (`init.vim` o `init.lua`):
+
+### En VimScript (init.vim):
+
+```vim
+" Configuración para insertar 4 espacios al presionar TAB
+set tabstop=4
+set shiftwidth=4
+set expandtab
+```
+
+### En Lua (init.lua):
+
+```lua
+-- Configuración para insertar 4 espacios al presionar TAB
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+```
+
+Estas configuraciones hacen lo siguiente:
+
+- `tabstop`: Configura el número de espacios que representa un carácter de tabulación al visualizar o editar.
+- `shiftwidth`: Establece la cantidad de espacios insertados o eliminados por las teclas `<` y `>`, 
+o cuando se realiza autoindentación.
+- `expandtab`: Hace que Neovim inserte espacios en lugar de tabuladores al presionar la tecla `TAB`.
+
+Después de agregar estas configuraciones y reiniciar Neovim, al presionar la tecla `TAB`,
+ debería insertar 4 espacios en lugar de un tabulador.
+
+Recuerda que es importante ser consistente en la configuración de tabuladores y espacios en tus proyectos
+ y colaborar con otros desarrolladores que puedan tener diferentes preferencias de configuración.
