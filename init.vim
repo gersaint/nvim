@@ -3,55 +3,58 @@
 call plug#begin('~/.AppData/Local/nvim/plugged') 	"directorio donde se van a instalar los plugins
 
 "plugins
-Plug 'joshdick/onedark.vim' 		"tema
-Plug 'Yggdroot/indentLine' 		"indentacion
-Plug 'mattn/emmet-vim' 			"emmet para diseño web
-Plug 'vim-airline/vim-airline'		"diseño de la barra en la cual se muestran los modos, la linea, etc.
-Plug 'vim-airline/vim-airline-themes'	"temas para el vim-airline
-Plug 'preservim/nerdtree'		"gestor de archivos en forma de arbol.
-Plug 'christoomey/vim-tmux-navigator'	"poder navegar entre archivos abiertos
-Plug 'jiangmiao/auto-pairs'		"autocompletado de llaves, corchetes, etc.
-Plug 'neoclide/coc.nvim', {'branch': 'release'}	"autocompletado inteligentei
+Plug 'joshdick/onedark.vim' 		                "tema
+Plug 'Yggdroot/indentLine' 		                    "indentacion
+Plug 'mattn/emmet-vim' 			                    "emmet para diseño web
+Plug 'vim-airline/vim-airline'		                "diseño de la barra en la cual se muestran los modos, la linea, etc.
+Plug 'vim-airline/vim-airline-themes'	            "temas para el vim-airline
+Plug 'preservim/nerdtree'		                    "gestor de archivos en forma de arbol.
+Plug 'christoomey/vim-tmux-navigator'	            "poder navegar entre archivos abiertos
+Plug 'jiangmiao/auto-pairs'		                    "autocompletado de llaves, corchetes, etc.
+Plug 'neoclide/coc.nvim', {'branch': 'release'}	    "autocompletado inteligente
 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'oberblastmeister/neogit'
 Plug 'monaqa/diffview.nvim'
 Plug 'sindrets/diffview.nvim'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'} "Multi cursor plugin
 
-call plug#end() 			"cerramos el llamado de los plugins
+call plug#end() 			                        "cerramos el llamado de los plugins
 
 "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 "CONFIGURACIONES BASICAS 
-set number 				"muestra los numeros de cada linea en la parte izquierda 
+set number 				    "muestra los numeros de cada linea en la parte izquierda 
 set relativenumber 			"la distribucion de los numeros en lineas de manera relativa
 set mouse=a 				"permite la interaccion con el mouse
 set noshowmode				"me deja de mostrar el modo en el que estamos 'normal, insert, visual, etc'
 syntax enable 				"activa el coloreado de sintaxis en algunos tipos de archivos como html, c, c++
 set encoding=utf-8 			"permite setear la codificación de archivos para aceptar caracteres especiales
+set sw=4 				    "la indentación genera 4 espacios
 
-set sw=4 				"la indentación genera 4 espacios
-
-set nowrap				"el texto en una linea no baja a la siguiente, solo continua en la misma hasta el infinito.
+set nowrap				    "el texto en una linea no baja a la siguiente, solo continua en la misma hasta el infinito.
 "set noswapfile				"para evitar el mensaje que sale al abrir algunos archivos sobre swap.
-set clipboard=unnamed			"para poder utilizar el portapapeles del sistema operativo 'esto permite poder copiar y pegar desde cualquier parte a nvim y viceversa.	
-
+set clipboard=unnamed		"para poder utilizar el portapapeles del sistema operativo 'esto permite poder copiar y pegar desde cualquier parte a nvim y viceversa.	
 
 " la siguiente configuracion habilita la tecla <TAB>
 " e inserta 4 espacios
 set tabstop=4
 set shiftwidth=4
 set expandtab
-
-set guifont=10
+    
+inoremap <expr> <Tab> col('.') - 1 > 0 && getline('.')[col('.') - 2] =~ '\k' ? '    ' : '<Tab>'
+        
+"set guifont=10
 
 " fold
-"set foldmethod=indent
+set foldmethod=indent
 set foldlevel=1
-set foldclose=all
+"set foldclose=all
 
-let s:fontsize = 10
+"::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+let s:fontsize = 5
 function! AdjustFontSize(amount)
   let s:fontsize = s:fontsize+a:amount
   :execute "GuiFont! Consolas:h" . s:fontsize
@@ -63,8 +66,15 @@ inoremap <C-ScrollWheelUp> <Esc>:call AdjustFontSize(1)<CR>a
 inoremap <C-ScrollWheelDown> <Esc>:call AdjustFontSize(-1)<CR>a
 
 
-set termguicolors 			"activa el true color en la terminal
-colorscheme onedark 			"activar el tema onedark
+set termguicolors 			                "activa el true color en la terminal
+colorscheme onedark 			            "activar el tema onedark
+
+ "añadimos un color personalizados al numero de linea
+highlight LineNr ctermfg=5 guifg=#05f2c3   
+" highlight CursorLineNr ctermfg=6 guifg=#c678dd
+
+highlight Comment ctermfg=blue
+" set background=dark
 
 "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -82,8 +92,6 @@ let g:airline_theme='onedark'	"el tema de airline
 "mapeando el abrir y cerrar de nerdtree con nerdtreetoggle vemos los archivos en el arbol y podemos cerrarlo a la vez, map es la C mayuscula representa el
 "control y -n la tecla n lo que indica que realizará la siguiente funcion de excribir el comando NERDTreeToggle y CR significa ENTER.
 map <C-n> :NERDTreeToggle<CR>
-
-
 
 "configuracion por defecto de coc
 " TextEdit might fail if hidden is not set.
@@ -256,6 +264,9 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 map <Leader>h :tabprevious<cr>
 map <Leader>l :tabnext<cr>
 
+"::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+" Configs : gersaint.cruz
+
 " Configurar Ctrl + Shift + flechas para seleccionar texto
 inoremap <S-Right> <Right>
 inoremap <S-Left> <Left>
@@ -272,6 +283,6 @@ nnoremap <C-V> :call system("xclip -o -selection clipboard")<CR>p
 " Configurar Ctrl + Y para rehacer en lugar de Ctrl + R
 nnoremap <C-Y> <C-R>
 
-
-
+" ctrl + c / para copiar el texto seleccioando 
+vnoremap <C-c> "+y
 
