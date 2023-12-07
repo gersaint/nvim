@@ -13,12 +13,17 @@ Plug 'christoomey/vim-tmux-navigator'	            "poder navegar entre archivos 
 Plug 'jiangmiao/auto-pairs'		                    "autocompletado de llaves, corchetes, etc.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}	    "autocompletado inteligente
 
+" git plugins
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'oberblastmeister/neogit'
 Plug 'monaqa/diffview.nvim'
 Plug 'sindrets/diffview.nvim'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'} "Multi cursor plugin
+
+Plug 'morhetz/gruvbox'
+
+Plug 'mg979/vim-visual-multi', {'branch': 'master'} "Multi Cursor / [Ctrl] + Up-Down
+
 
 call plug#end() 			                        "cerramos el llamado de los plugins
 
@@ -45,12 +50,11 @@ set expandtab
     
 inoremap <expr> <Tab> col('.') - 1 > 0 && getline('.')[col('.') - 2] =~ '\k' ? '    ' : '<Tab>'
         
-"set guifont=10
-
 " fold
 set foldmethod=indent
 set foldlevel=1
 "set foldclose=all
+"set guifont=9
 
 "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -59,22 +63,23 @@ function! AdjustFontSize(amount)
   let s:fontsize = s:fontsize+a:amount
   :execute "GuiFont! Consolas:h" . s:fontsize
 endfunction
-
+  
 noremap <C-ScrollWheelUp> :call AdjustFontSize(1)<CR>
 noremap <C-ScrollWheelDown> :call AdjustFontSize(-1)<CR>
 inoremap <C-ScrollWheelUp> <Esc>:call AdjustFontSize(1)<CR>a
 inoremap <C-ScrollWheelDown> <Esc>:call AdjustFontSize(-1)<CR>a
 
-
 set termguicolors 			                "activa el true color en la terminal
 colorscheme onedark 			            "activar el tema onedark
+" colorscheme gruvbox
+" colorscheme dracula
 
- "añadimos un color personalizados al numero de linea
+
+"añadimos un coloD personalizados al numero de linea
 highlight LineNr ctermfg=5 guifg=#05f2c3   
 " highlight CursorLineNr ctermfg=6 guifg=#c678dd
 
-highlight Comment ctermfg=blue
-" set background=dark
+"" set background=dark
 
 "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -85,13 +90,22 @@ let g:user_emmet_leader_key=',' 	"mapeando la tecla lider por una coma, con esto
 "configuracion de vim-airline
 let g:airline#extensions#tabline#enabled = 1	"muestra la linea de pestaña en la que estamos buffer
 let g:airline#extensions#tabline#formatter = 'unique_tail'	"muestra solo el nombre del archivo que estamos modificando
-let g:airline_theme='onedark'	"el tema de airline
 
+let g:airline_theme='onedark'	"el tema de airline
+" let g:airline_theme='luna'	"el tema de airline
+
+" highlight Comment ctermfg=blue
+highlight Comment ctermfg=blue
 
 "configuracion de nerdtree
 "mapeando el abrir y cerrar de nerdtree con nerdtreetoggle vemos los archivos en el arbol y podemos cerrarlo a la vez, map es la C mayuscula representa el
 "control y -n la tecla n lo que indica que realizará la siguiente funcion de excribir el comando NERDTreeToggle y CR significa ENTER.
 map <C-n> :NERDTreeToggle<CR>
+
+
+" let g:NERDTreeHijackNetrw = 0
+let g:NERDTreeSplitVertical = 0
+
 
 "configuracion por defecto de coc
 " TextEdit might fail if hidden is not set.
