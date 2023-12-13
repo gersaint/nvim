@@ -13,6 +13,9 @@ Plug 'christoomey/vim-tmux-navigator'	            "poder navegar entre archivos 
 Plug 'jiangmiao/auto-pairs'		                    "autocompletado de llaves, corchetes, etc.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}	    "autocompletado inteligente
 
+" color themes 
+Plug 'folke/tokyonight.nvim'
+
 " git plugins
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -22,7 +25,7 @@ Plug 'sindrets/diffview.nvim'
 
 Plug 'morhetz/gruvbox'
 
-Plug 'mg979/vim-visual-multi', {'branch': 'master'} "Multi Cursor / [Ctrl] + Up-Down
+Plug 'mg979/vim-visual-multi', {'branch': 'master'} " Multi Cursor / [Ctrl] + Up-Down
 
 
 call plug#end() 			                        "cerramos el llamado de los plugins
@@ -70,9 +73,17 @@ inoremap <C-ScrollWheelUp> <Esc>:call AdjustFontSize(1)<CR>a
 inoremap <C-ScrollWheelDown> <Esc>:call AdjustFontSize(-1)<CR>a
 
 set termguicolors 			                "activa el true color en la terminal
-colorscheme onedark 			            "activar el tema onedark
+" colorscheme onedark 			            "activar el tema onedark
 " colorscheme gruvbox
 " colorscheme dracula
+
+" colorscheme tokyonight
+
+" There are also colorschemes for the different styles.
+" colorscheme tokyonight-night
+" colorscheme tokyonight-storm
+" colorscheme tokyonight-day
+colorscheme tokyonight-moon
 
 
 "añadimos un coloD personalizados al numero de linea
@@ -299,4 +310,10 @@ nnoremap <C-Y> <C-R>
 
 " ctrl + c / para copiar el texto seleccioando 
 vnoremap <C-c> "+y
+
+" Save a file with leader --> w
+nnoremap <leader>w :w<cr>
+
+" -------------------------;;;;;;-
+
 
